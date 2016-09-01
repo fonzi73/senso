@@ -59,22 +59,27 @@
             };
 
             var spielSequenzAB = function (sequenz){
-                switch(sequenz.farben[0]){
-                    case 'rot':
-                        knopfRot.leuchten();
-                        break;
-                    case 'gelb':
-                        knopfGelb.leuchten();
-                        break;
-                    case 'gruen':
-                        knopfGruen.leuchten();
-                        break;
-                    case 'blau':
-                        knopfBlau.leuchten();
-                        break;
-                    default:
-                        alert('keine Farbe');
-                }
+                var objName = 'knopf' + sequenz.farben[0].charAt(0).toUpperCase() +
+                        sequenz.farben[0].substr(1);
+                window[objName].leuchten();
+                //                
+                //                Alternative Methode
+//                switch(sequenz.farben[0]){
+//                    case 'rot':
+//                        knopfRot.leuchten();
+//                        break;
+//                    case 'gelb':
+//                        knopfGelb.leuchten();
+//                        break;
+//                    case 'gruen':
+//                        knopfGruen.leuchten();
+//                        break;
+//                    case 'blau':
+//                        knopfBlau.leuchten();
+//                        break;
+//                    default:
+//                        alert('keine Farbe');
+//                }
 //                alert(sequenz.farben[0]);
             };
             
