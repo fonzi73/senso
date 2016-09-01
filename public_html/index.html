@@ -11,7 +11,7 @@
         <script>
 
             // Variablen für die Farbknöpfe
-            var level = 10;
+            var level = 4;
             var knopfRot;
             var knopfGelb;
             var knopfGruen;
@@ -65,11 +65,14 @@
 //            };
             
             var spielSequenzAb = function (sequenz, von, level){
-                if (von <= level){
+                if (von < level){
                     sequenz.farben[von].leuchten(function (){
                         spielSequenzAb(sequenz, von + 1, level);
                     });
-            }
+                    
+            } else {
+                sequenz.farben[von].leuchten(Farbknopf.aktiviereClick());
+            };
                 
 //                var objName = 'knopf' + sequenz.farben[0].charAt(0).toUpperCase() +
 //                        sequenz.farben[0].substr(1);
