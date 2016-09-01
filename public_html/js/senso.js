@@ -39,11 +39,12 @@ Farbknopf.aktiviereClick = function () {
     });
 };
 
-Farbknopf.prototype.leuchten = function (){
+Farbknopf.prototype.leuchten = function (next){
     var standardfarbe = this.obj.css('background-color');
-    this.obj.animate({'background-color': this.leuchtfarbe}, 300);
-    this.obj.animate({'background-color': standardfarbe}, 300);
-    
+    this.obj.animate({'background-color': this.leuchtfarbe}, 150); // Aufleuchten
+    this.obj.animate({'background-color': this.leuchtfarbe}, 200);
+    this.obj.animate({'background-color': standardfarbe}, 150); // Abdunkeln
+    this.obj.animate({'background-color': standardfarbe}, 500, next);
 };
 
 
@@ -55,10 +56,10 @@ var Spielsequenz = function () {
 //Methode Sequenz erstellen
 Spielsequenz.erstelleArray64Random = function () {
     var farben = [];
-    var grundFarben = ['rot', 'gelb', 'gruen', 'blau'];
+    var farbknoepfe = [knopfRot, knopfGelb, knopfGruen, knopfBlau];
     for (var i = 0; i < 64; i++) {
         var zahl = Math.floor(Math.random() * 4);
-        farben.push(grundFarben[zahl]);
+        farben.push(farbknoepfe[zahl]);
     }
     return farben;
 };
