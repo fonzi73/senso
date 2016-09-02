@@ -11,11 +11,12 @@
         <script>
 
             // Variablen für die Farbknöpfe
-            var level = 4;
+            var level = 2;
             var knopfRot;
             var knopfGelb;
             var knopfGruen;
             var knopfBlau;
+            var timer;
 
             $(document).ready(function () {
                 Farbknopf.deaktiviereClick();
@@ -32,7 +33,7 @@
 
 
             //  Zeige Level Funktion
-            var zahl = 33;
+            var zahl = 11;
             var zeigeLevelAn = function (level) {
                 $('#level').val(level);
             };
@@ -46,57 +47,59 @@
 
             //  Aktiviere Startknopf
             var aktiviereStartknopf = function () {
+                $('#start').css('cursor', 'pointer');
                 $('#start').click(function () {
                     loeseStartaus();
                 });
             };
 
+            // Deaktiviere Startknopf
+            var deaktiviereStartknopf = function () {
+                $('#start').unbind('click');
+                $('#start').css('cursor', 'default');
+            }
 
             //  Starte Spiel
             var loeseStartaus = function () {
                 var sq = new Spielsequenz();
+                deaktiviereStartknopf();
                 Farbknopf.deaktiviereClick();
                 spielSequenzAb(sq, 0, level);
+
             };
 
 //            var spielSequenzAb = function (sequenz, von, level) {
 //                
 //                sequenz.farben[0].leuchten();
 //            };
-            
-            var spielSequenzAb = function (sequenz, von, level){
-                if (von < level){
-                    sequenz.farben[von].leuchten(function (){
+
+            var spielSequenzAb = function (sequenz, von, level) {
+                if (von < level - 1) {
+                    sequenz.farben[von].leuchten(function () {
                         spielSequenzAb(sequenz, von + 1, level);
                     });
-                    
-            } else {
-                sequenz.farben[von].leuchten(Farbknopf.aktiviereClick());
+
+                } else {
+                    sequenz.farben[von].leuchten(starteSpielereingabe);
+                }
             };
-                
-//                var objName = 'knopf' + sequenz.farben[0].charAt(0).toUpperCase() +
-//                        sequenz.farben[0].substr(1);
-//                window[objName].leuchten();
-                //                
-                //                Alternative Methode
-//                switch(sequenz.farben[0]){
-//                    case 'rot':
-//                        knopfRot.leuchten();
-//                        break;
-//                    case 'gelb':
-//                        knopfGelb.leuchten();
-//                        break;
-//                    case 'gruen':
-//                        knopfGruen.leuchten();
-//                        break;
-//                    case 'blau':
-//                        knopfBlau.leuchten();
-//                        break;
-//                    default:
-//                        alert('keine Farbe');
-//                }
-//                alert(sequenz.farben[0]);
+
+            var starteSpielereingabe = function () {
+                Farbknopf.aktiviereClick();
+                timer = window.setTimeout(spielEnde, 3000);
             };
+
+            var spielEnde = function () {
+                alert('aus');
+                aktiviereStartknopf();
+            };
+
+            var pruefeUserreaktion = function () {
+                clearTimeout(timer);
+                alert('benutz');
+                aktiviereStartknopf();
+            }
+
 
 
         </script>

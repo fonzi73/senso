@@ -10,34 +10,41 @@ function Farbknopf(obj, leuchtfarbe) {
 Farbknopf.deaktiviereClick = function () {
     $('.farbknopf').unbind('mousedown');
     $('.farbknopf').unbind('mouseup');
+    $('.farbknopf').css('cursor', 'default');
 };
 
 Farbknopf.aktiviereClick = function () {
+    $('.farbknopf').css('cursor', 'pointer');
     $('#gelb').mousedown(function () {
         $(this).css('background-color', '#ffff00');
     });
     $('#gelb').mouseup(function () {
         $(this).css('background-color', '#cccc00');
+        pruefeUserreaktion();
     });
     $('#rot').mousedown(function () {
         $(this).css('background-color', '#ff3333');
     });
     $('#rot').mouseup(function () {
         $(this).css('background-color', '#cc0000');
+        pruefeUserreaktion();
     });
     $('#blau').mousedown(function () {
         $(this).css('background-color', '#0066ff');
     });
     $('#blau').mouseup(function () {
         $(this).css('background-color', '#0000cc');
+        pruefeUserreaktion();
     });
     $('#gruen').mousedown(function () {
         $(this).css('background-color', '#00ff00');
     });
     $('#gruen').mouseup(function () {
         $(this).css('background-color', '#00cc00');
+        pruefeUserreaktion();
     });
 };
+
 
 Farbknopf.prototype.leuchten = function (next){
     var standardfarbe = this.obj.css('background-color');
